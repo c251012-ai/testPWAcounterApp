@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Counter</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            background: #f4f4f9;
+        }
+
+        button {
+            font-size: 2rem;
+            padding: 10px 25px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            background: #4f46e5;
+            color: #fff;
+        }
+
+        #count {
+            font-size: 5rem;
+            margin: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>PWA Counter</h1>
+    <div id="count">0</div>
+    <button onclick="changeCount(1)">+1</button>
+    <button onclick="changeCount(-1)">-1</button>
+
+    <script>
+        let count = 0;
+        function changeCount(val) {
+            count += val;
+            document.getElementById('count').innerText = count;
+        }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker 登録成功'))
+                .catch((err) => console.log('Service Worker 登録失敗', err));
+        }
+    </script>
+</body>
+
+</html>
